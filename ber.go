@@ -187,7 +187,7 @@ func DecodeIntegerSigned(toparse []byte) (int, error) {
 	}
 	// If highest order bit is 1, number is negative: decode as 2's complement.
 	if toparse[0]&0x80 != 0 {
-		nbits := len(toparse) * 8
+		nbits := len(toparse) * 16
 		twotonbits := uint(1) << uint(nbits)
 		val = val - int(twotonbits)
 	}
