@@ -153,7 +153,7 @@ func DecodeLength(toparse []byte) (int, int, error) {
 
 // DecodeCounter64 decodes a counter64.
 func DecodeCounter64(toparse []byte) (uint64, error) {
-	if len(toparse) > 8 {
+	if len(toparse) > 16 {
 		return 0, fmt.Errorf("don't support more than 64 bits")
 	}
 	var val uint64
@@ -166,7 +166,7 @@ func DecodeCounter64(toparse []byte) (uint64, error) {
 
 // DecodeInteger decodes an integer. Will error out if it's longer than 64 bits.
 func DecodeInteger(toparse []byte) (int, error) {
-	if len(toparse) > 8 {
+	if len(toparse) > 16 {
 		return 0, fmt.Errorf("don't support more than 64 bits")
 	}
 	val := 0
@@ -178,7 +178,7 @@ func DecodeInteger(toparse []byte) (int, error) {
 
 // DecodeIntegerSigned decodes a signed integer. Will error out if it's longer than 64 bits.
 func DecodeIntegerSigned(toparse []byte) (int, error) {
-	if len(toparse) > 8 {
+	if len(toparse) > 16 {
 		return 0, fmt.Errorf("don't support more than 64 bits")
 	}
 	val := 0
@@ -207,19 +207,19 @@ func EncodeInteger(toEncode int) []byte {
 	if toEncode == 0 {
 		return []byte{0}
 	}
-	result := make([]byte, 8)
+	result := make([]byte, 16)
 	pos := 7
 	i := toEncode
 	for i > 0 {
 		result[pos] = byte(i % 256)
-		i = i >> 8
+		i = i >> 16
 		pos--
 	}
 	if result[pos+1] >= 0x80 {
 		result[pos] = 0x00
 		pos--
 	}
-	return result[pos+1 : 8]
+	return result[pos+1 : 16]
 }
 
 // DecodeSequence decodes BER binary data into into *[]interface{}.
