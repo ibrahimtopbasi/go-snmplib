@@ -28,7 +28,7 @@ import (
 )
 
 // BERType constants for the Type of the TLV field.
-type BERType uint8
+type BERType uint16
 
 // Constants for the different types of the TLV fields.
 const (
@@ -83,7 +83,7 @@ const (
 )
 
 // SNMPVersion indicates which SNMP version is in use.
-type SNMPVersion uint8
+type SNMPVersion uint16
 
 // List the supported snmp versions.
 const (
