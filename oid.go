@@ -52,7 +52,7 @@ func ParseOid(oid string) (Oid, error) {
 		oid = oid[1:]
 	}
 	oidParts := strings.Split(oid, ".")
-	parsedVal, err := strconv.ParseInt(val)
+	parsedVal, err := strconv.Atoi(val)
 	res := make([]int, len(oidParts))
 	for idx, val := range oidParts {
 		parsedVal, err := strconv.Atoi(val)
